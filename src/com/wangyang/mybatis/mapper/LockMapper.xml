@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wangyang.mybatis.mapper.LockMapper" >
+  <resultMap id="BaseResultMap" type="com.wangyang.mybatis.entities.Lock" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="lockName" property="lockname" jdbcType="VARCHAR" />
+    <result column="key_id" property="keyId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_lock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wangyang.mybatis.entities.Lock" >
+    insert into tbl_lock (id, lockName, key_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{lockname,jdbcType=VARCHAR}, #{keyId,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wangyang.mybatis.entities.Lock" >
+    update tbl_lock
+    set lockName = #{lockname,jdbcType=VARCHAR},
+      key_id = #{keyId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, lockName, key_id
+    from tbl_lock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, lockName, key_id
+    from tbl_lock
+  </select>
+</mapper>
